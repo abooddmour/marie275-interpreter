@@ -18,8 +18,9 @@ from marie.machine import MEMORY_SIZE, is_instruction, to_signed16
 class Executor:
     """Runs a loaded program on a Machine."""
 
-    def __init__(self, machine):
+    def __init__(self, machine, io):
         self.machine = machine
+        self.io = io            # IOHandler: input values and output
         self.halted = False
         self.last_line = 0      # line of the last instruction that ran
 
@@ -128,6 +129,16 @@ class Executor:
         # AC <- NOT AC: flip all 16 bits (same as -AC - 1, so Not 5 = -6)
         self.machine.ac = to_signed16(self.machine.ac ^ 0xFFFF)
 
+    # ------------------------------------------------------------ input / output
+
+    def exec_input(self, instr):
+        # AC <- next value from the --input list
+        self.machine.ac = self.io.read_input(instr.line)
+
+    def exec_output(self, instr):
+        # print AC in decimal; AC does not change
+        self.io.write_output(self.machine.ac)
+
     # ------------------------------------------------------------ control
 
     def exec_jump(self, instr):
@@ -160,6 +171,8 @@ class Executor:
         "And":   exec_and,
         "Or":    exec_or,
         "Not":   exec_not,
+        "Input": exec_input,
+        "Output": exec_output,
         "Jump":  exec_jump,
         "Skipcond": exec_skipcond,
         "Halt":  exec_halt,
