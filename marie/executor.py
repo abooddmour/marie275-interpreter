@@ -112,7 +112,37 @@ class Executor:
         # -32768 / -1 = 32768 does not fit, so it wraps to -32768.
         self.machine.ac = to_signed16(quotient)
 
+    # ------------------------------------------------------------ logic
+
+    def exec_and(self, instr):
+        # AC <- AC AND M[X], bit by bit on all 16 bits
+        value = self.read_number(instr, instr.operand)
+        self.machine.ac = to_signed16((self.machine.ac & 0xFFFF) & (value & 0xFFFF))
+
+    def exec_or(self, instr):
+        # AC <- AC OR M[X], bit by bit on all 16 bits
+        value = self.read_number(instr, instr.operand)
+        self.machine.ac = to_signed16((self.machine.ac & 0xFFFF) | (value & 0xFFFF))
+
+    def exec_not(self, instr):
+        # AC <- NOT AC: flip all 16 bits (same as -AC - 1, so Not 5 = -6)
+        self.machine.ac = to_signed16(self.machine.ac ^ 0xFFFF)
+
     # ------------------------------------------------------------ control
+
+    def exec_jump(self, instr):
+        # PC <- X: the next instruction is fetched from address X
+        self.machine.pc = instr.operand
+
+    def exec_skipcond(self, instr):
+        # If the condition holds, skip the next instruction (PC <- PC + 1).
+        #   000: AC < 0     400: AC = 0     800: AC > 0
+        ac = self.machine.ac
+        condition = instr.operand
+        if (condition == 0x000 and ac < 0) or \
+           (condition == 0x400 and ac == 0) or \
+           (condition == 0x800 and ac > 0):
+            self.machine.pc += 1
 
     def exec_halt(self, instr):
         # Stop the machine.
@@ -127,5 +157,10 @@ class Executor:
         "Subt":  exec_subt,
         "Mult":  exec_mult,
         "Div":   exec_div,
+        "And":   exec_and,
+        "Or":    exec_or,
+        "Not":   exec_not,
+        "Jump":  exec_jump,
+        "Skipcond": exec_skipcond,
         "Halt":  exec_halt,
     }
