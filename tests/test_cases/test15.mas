@@ -1,0 +1,7 @@
+/ Input: none
+/ Test 15: run-time error "too many steps": an infinite loop is stopped after 100,000 instructions
+        Load One
+        Output             / prints 1 before the loop starts
+Loop,   Jump Loop          / jumps to itself forever
+        Halt               / never reached
+One,    Dec 1

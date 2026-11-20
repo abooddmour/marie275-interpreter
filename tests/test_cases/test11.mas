@@ -1,0 +1,7 @@
+/ Input: 5
+/ Test 11: run-time error "no input left" (Input after every value is used)
+        Input
+        Output             / prints 5
+        Input              / no value left: error on this line
+        Output             / not reached
+        Halt

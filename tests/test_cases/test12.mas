@@ -1,0 +1,9 @@
+/ Input: none
+/ Test 12: loading error "undefined label"; the program never starts, so nothing is printed
+        Load One
+        Output             / not printed: loading fails before running
+        Add Totl           / typo: no line is labelled Totl
+        Output
+        Halt
+One,    Dec 1
+Total,  Dec 0

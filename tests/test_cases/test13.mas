@@ -1,0 +1,15 @@
+/ Input: none
+/ Test 13: edge cases: -32768 / -1 wraps, a label that is also a hex number, any-case names
+        load Min           / lower-case instruction names work
+        DIV MinusOne       / -32768 / -1 = 32768 does not fit: wraps to -32768
+        Output
+        Load A             / A is the label (address 00B), not the hex address 00A
+        Output             / prints 7, not 99
+        LOAD Neg           / Hex 8000 is -32768
+        Output
+        Halt
+Min,      Dec -32768
+MinusOne, Dec -1
+Other,    Dec 99       / address 00A: what "Load A" would read if A meant hex 00A
+A,        Dec 7
+Neg,      Hex 8000

@@ -1,0 +1,14 @@
+/ Input: 0
+/ Test 14: edge case: a loop that runs zero times, so the program prints nothing
+        Input
+        Store N
+Loop,   Load N
+        Skipcond 800       / N > 0: run the body
+        Jump Done          / N = 0: leave at once, the body never runs
+        Output
+        Subt One
+        Store N
+        Jump Loop
+Done,   Halt
+N,      Dec 0
+One,    Dec 1
