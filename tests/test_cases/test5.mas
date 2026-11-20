@@ -1,0 +1,9 @@
+/ Input: none
+/ Test 5: division by zero is a run-time error; earlier output is still printed
+        Load Ten
+        Output
+        Div Zero
+        Output
+        Halt
+Ten,    Dec 10
+Zero,   Dec 0

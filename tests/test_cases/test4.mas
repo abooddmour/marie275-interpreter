@@ -1,0 +1,26 @@
+/ Input: none
+/ Test 4: 16-bit arithmetic rules (overflow, division toward zero, Not)
+        Load Big
+        Add One
+        Output             / 32767 + 1 wraps to -32768
+        Load K300
+        Mult K200
+        Output             / 60000 wraps to -5536
+        Load K17
+        Div Five
+        Output             / 17 / 5 = 3
+        Load Neg7
+        Div Two
+        Output             / -7 / 2 = -3 (toward zero)
+        Load Five
+        Not
+        Output             / Not 5 = -6
+        Halt
+Big,    Dec 32767
+One,    Dec 1
+K300,   Dec 300
+K200,   Dec 200
+K17,    Dec 17
+Five,   Dec 5
+Neg7,   Dec -7
+Two,    Dec 2

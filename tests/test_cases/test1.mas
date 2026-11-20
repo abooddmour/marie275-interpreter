@@ -1,0 +1,9 @@
+/ Input: 6 7
+/ Test 1: add two input values (Input, Store, Add, Output, Halt)
+        Input
+        Store A
+        Input
+        Add A
+        Output
+        Halt
+A,      Dec 0

@@ -1,0 +1,23 @@
+/ Input: 10
+/ Test 8: sum 1 + 2 + ... + n (labels used before they are defined)
+        Input
+        Store N
+        Clear
+        Store Sum
+Loop,   Load N
+        Skipcond 400       / N = 0: finished
+        Jump Add1
+        Jump Done
+Add1,   Load Sum
+        Add N
+        Store Sum
+        Load N
+        Subt One
+        Store N
+        Jump Loop
+Done,   Load Sum
+        Output
+        Halt
+N,      Dec 0
+Sum,    Dec 0
+One,    Dec 1

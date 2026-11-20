@@ -1,0 +1,10 @@
+/ Input: -12
+/ Test 10: absolute value of a negative input
+        Input
+        Store X
+        Skipcond 000       / X < 0: skip the Jump and negate
+        Jump Print
+        Clear
+        Subt X
+Print,  Output
+X,      Dec 0

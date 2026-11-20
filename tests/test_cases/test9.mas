@@ -1,0 +1,22 @@
+/ Input: 8
+/ Test 9: factorial with Mult (8! does not fit in 16 bits)
+        Input
+        Store N
+        Load One
+        Store Fact
+Loop,   Load N
+        Skipcond 800
+        Jump Done
+        Load Fact
+        Mult N
+        Store Fact
+        Load N
+        Subt One
+        Store N
+        Jump Loop
+Done,   Load Fact
+        Output
+        Halt
+N,      Dec 0
+Fact,   Dec 0
+One,    Dec 1

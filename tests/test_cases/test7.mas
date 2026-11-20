@@ -1,0 +1,20 @@
+/ Input: none
+/ Test 7: logic instructions and Hex data
+        Load Low
+        And Mixed
+        Output
+        Load Low
+        Or Mixed
+        Output
+        Load AllOnes
+        Output
+        Not
+        Output
+        Load Mixed
+        Not
+        And Low
+        Output
+        Halt
+Low,     Hex 00FF
+Mixed,   Hex 0F0F
+AllOnes, Hex FFFF

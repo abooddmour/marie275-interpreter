@@ -1,0 +1,16 @@
+/ Input: 3
+/ Test 6: count down from the input to 1 (loop, Skipcond 000 and 800)
+        Input
+        Store N
+Loop,   Load N
+        Skipcond 800       / N > 0: keep going
+        Jump Done
+        Output
+        Subt One
+        Store N
+        Skipcond 000       / never true here: N - 1 is not negative
+        Jump Loop
+        Output             / not reached
+Done,   Halt
+N,      Dec 0
+One,    Dec 1

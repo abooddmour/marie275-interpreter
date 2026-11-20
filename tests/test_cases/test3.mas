@@ -1,0 +1,17 @@
+/ Input: 4 9
+/ Test 3: print the larger of two inputs (if-else with Skipcond 800)
+        Input
+        Store A
+        Input
+        Store B
+        Subt A             / AC = B - A
+        Skipcond 800       / B > A: skip to printing B
+        Jump PrintA
+        Load B
+        Output
+        Jump Done
+PrintA, Load A
+        Output
+Done,   Halt
+A,      Dec 0
+B,      Dec 0
