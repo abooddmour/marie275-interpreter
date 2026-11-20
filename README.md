@@ -75,8 +75,3 @@ tests/run_tests.py      test runner
 tests/test_cases/       test1 .. test17 (.mas and _output.txt)
 docs/design-notes.md    how memory, instructions and the symbol table are represented
 ```
-
-## Use of AI tools
-
-This project was developed with the help of an AI coding assistant, with the
-instructor's permission. All code was reviewed, tested and is explained by the author.
