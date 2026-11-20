@@ -1,0 +1,4 @@
+# Keep test programs and expected outputs with Unix line endings,
+# so the expected output files stay exactly the same on every computer.
+*.mas text eol=lf
+*.txt text eol=lf

@@ -1,0 +1,9 @@
+# Python cache files
+__pycache__/
+*.pyc
+
+# Editor and tool folders
+.vscode/
+.idea/
+.claude/
+CLAUDE.md
