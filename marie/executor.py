@@ -14,6 +14,9 @@ around exactly like 16-bit hardware.
 from marie.errors import MarieError
 from marie.machine import MEMORY_SIZE, is_instruction, to_signed16
 
+# More than this many executed instructions is treated as an infinite loop.
+MAX_STEPS = 100_000
+
 
 class Executor:
     """Runs a loaded program on a Machine."""
@@ -22,6 +25,7 @@ class Executor:
         self.machine = machine
         self.io = io            # IOHandler: input values and output
         self.halted = False
+        self.steps = 0          # how many instructions have been executed
         self.last_line = 0      # line of the last instruction that ran
 
     # ------------------------------------------------------------ main loop
@@ -46,13 +50,22 @@ class Executor:
             line = m.source_lines.get(address, self.last_line)
             raise MarieError(line, f"executing data at address {address:03X}")
 
+        # Step limit: 100,000 instructions have already run, so running
+        # this one would be "more than 100,000" (a likely infinite loop).
+        if self.steps >= MAX_STEPS:
+            raise MarieError(word.line, f"too many steps (more than {MAX_STEPS:,} instructions)")
+
         # Advance PC before carrying out the instruction.
         m.pc = address + 1
 
         # Decode: find the handler for this instruction, then execute it.
         handler = self.HANDLERS[word.name]
         handler(self, word)
+        self.steps += 1
         self.last_line = word.line
+
+        # --trace: print the address, the instruction and the new AC.
+        self.io.write_trace(address, word, m.ac)
 
     # ------------------------------------------------------------ helpers
 
