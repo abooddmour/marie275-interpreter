@@ -39,6 +39,10 @@ INSTRUCTIONS = {
     "jump":     ("Jump", True),
     "skipcond": ("Skipcond", True),
     "halt":     ("Halt", False),
+    # Bonus: array instructions that use a pointer (X holds an address).
+    "loadi":    ("LoadI", True),
+    "storei":   ("StoreI", True),
+    "addi":     ("AddI", True),
 }
 
 # Data directives: they put a number in memory instead of an instruction.

@@ -152,6 +152,31 @@ class Executor:
         # print AC in decimal; AC does not change
         self.io.write_output(self.machine.ac)
 
+    # ------------------------------------------------------------ bonus: pointers
+
+    def read_pointer(self, instr):
+        """Return the address stored in M[X] (X is the instruction's operand).
+
+        M[X] must be a number between 000 and FFF; it is used as an address.
+        """
+        pointer = self.read_number(instr, instr.operand)
+        if pointer < 0 or pointer >= MEMORY_SIZE:
+            raise MarieError(instr.line, f"address out of range: pointer value {pointer}")
+        return pointer
+
+    def exec_loadi(self, instr):
+        # AC <- M[M[X]]
+        self.machine.ac = self.read_number(instr, self.read_pointer(instr))
+
+    def exec_storei(self, instr):
+        # M[M[X]] <- AC
+        self.machine.write(self.read_pointer(instr), self.machine.ac)
+
+    def exec_addi(self, instr):
+        # AC <- AC + M[M[X]]
+        value = self.read_number(instr, self.read_pointer(instr))
+        self.machine.ac = to_signed16(self.machine.ac + value)
+
     # ------------------------------------------------------------ control
 
     def exec_jump(self, instr):
@@ -189,4 +214,7 @@ class Executor:
         "Jump":  exec_jump,
         "Skipcond": exec_skipcond,
         "Halt":  exec_halt,
+        "LoadI": exec_loadi,
+        "StoreI": exec_storei,
+        "AddI":  exec_addi,
     }

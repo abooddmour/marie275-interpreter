@@ -1,0 +1,29 @@
+/ Input: none
+/ Test 16 (bonus): sum an array of 5 numbers with AddI and a pointer
+        Clear
+        Store Sum
+Loop,   Load Count
+        Skipcond 800       / Count > 0: add the next element
+        Jump Done
+        Load Sum
+        AddI Ptr           / AC = Sum + M[M[Ptr]] (the element Ptr points at)
+        Store Sum
+        Load Ptr           / move the pointer to the next element
+        Add One
+        Store Ptr
+        Load Count
+        Subt One
+        Store Count
+        Jump Loop
+Done,   Load Sum
+        Output             / 10 + 20 - 5 + 7 + 3 = 35
+        Halt
+Sum,    Dec 0
+Count,  Dec 5
+One,    Dec 1
+Ptr,    Hex 016            / the address of Arr (016)
+Arr,    Dec 10
+        Dec 20
+        Dec -5
+        Dec 7
+        Dec 3

@@ -1,0 +1,42 @@
+/ Input: none
+/ Test 17 (bonus): copy an array with LoadI / StoreI, then print the copy
+Loop,   Load Count
+        Skipcond 800       / Count > 0: copy the next element
+        Jump Print
+        LoadI Src          / AC = M[M[Src]]
+        StoreI Dst         / M[M[Dst]] = AC
+        Load Src           / move both pointers on by one
+        Add One
+        Store Src
+        Load Dst
+        Add One
+        Store Dst
+        Load Count
+        Subt One
+        Store Count
+        Jump Loop
+Print,  Load N
+        Skipcond 800       / N > 0: print the next element of Copy
+        Jump Done
+        LoadI P
+        Output
+        Load P
+        Add One
+        Store P
+        Load N
+        Subt One
+        Store N
+        Jump Print
+Done,   Halt
+Count,  Dec 3
+N,      Dec 3
+One,    Dec 1
+Src,    Hex 022            / the address of Orig (022)
+Dst,    Hex 025            / the address of Copy (025)
+P,      Hex 025            / pointer used for printing Copy
+Orig,   Dec 100
+        Dec -200
+        Hex FFFF
+Copy,   Dec 0
+        Dec 0
+        Dec 0
